@@ -1,30 +1,30 @@
 CREATE TABLE products (
-                          product_id SERIAL PRIMARY KEY,
-                          product_name VARCHAR(100),
-                          stock INT,
-                          price NUMERIC(10,2)
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100),
+    stock INT,
+    price NUMERIC(10,2)
 );
 
 CREATE TABLE customers (
-                           customer_id SERIAL PRIMARY KEY,
-                           name VARCHAR(100),
-                           balance NUMERIC(12,2)
+    customer_id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    balance NUMERIC(12,2)
 );
 
 CREATE TABLE orders (
-                        order_id SERIAL PRIMARY KEY,
-                        customer_id INT REFERENCES customers(customer_id),
-                        total_amount DECIMAL(10,2),
-                        created_at TIMESTAMP DEFAULT NOW(),
-                        status VARCHAR(20) DEFAULT 'PENDING'
+    order_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id),
+    total_amount DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT NOW(),
+    status VARCHAR(20) DEFAULT 'PENDING'
 );
 
 CREATE TABLE order_items (
-                             item_id SERIAL PRIMARY KEY,
-                             order_id INT REFERENCES orders(order_id),
-                             product_id INT REFERENCES products(product_id),
-                             quantity INT,
-                             subtotal NUMERIC(10,2)
+    item_id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES orders(order_id),
+    product_id INT REFERENCES products(product_id),
+    quantity INT,
+    subtotal NUMERIC(10,2)
 );
 
 INSERT INTO customers(name, balance)
